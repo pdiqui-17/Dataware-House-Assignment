@@ -18,8 +18,30 @@ npm run dev
 On Windows PowerShell, use `Copy-Item .env.example .env` instead of `cp`.
 
 Try:
+
 - `GET http://localhost:3000/`
 - `GET http://localhost:3000/api/v1/health`
+
+## Sales analysis
+
+Use `GET /api/v1/sale/analysis` with `dim=time` or `dim=seller_geo`.
+The analysis accepts hierarchy depth and drill-down filters:
+
+- Time: `year`, `quarter`, `month`, `from`, `to`
+- Seller geography: `state`, `city`
+- Other filters: `category`, `status`
+
+For example:
+`/api/v1/sale/analysis?dim=time&depth=3&year=2018&quarter=1`
+
+Delivery analysis is available at:
+`/api/v1/delivery/analysis?dim=time&depth=3&year=2018`
+
+Delivery delay distribution is available at:
+`/api/v1/delivery/distribution?dim=time&depth=3&year=2018`
+
+The distribution response groups eligible orders into `early_8plus`, `early_1_7`,
+`on_time`, `late_1_3`, `late_4_7`, and `late_8plus` buckets.
 
 ## Scripts
 

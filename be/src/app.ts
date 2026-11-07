@@ -9,9 +9,11 @@ import { notFound } from './middleware/not-found.js';
 import { healthRouter } from './modules/health/health.routes.js';
 import { dbRouter } from './modules/health/health.routes.js';
 import { deliveryRouter } from './modules/delivery.routes.js';
+import { dssRouter } from './modules/dss.routes.js';
 import { metaRouter } from './modules/meta.routes.js';
 import { reviewRouter } from './modules/review.routes.js';
 import { saleRouter } from './modules/sale.routes.js';
+import { sellerRouter } from './modules/seller.routes.js';
 export const app = express();
 
 app.disable('x-powered-by');
@@ -32,6 +34,8 @@ app.use('/api/v1/sale', saleRouter);
 app.use('/api/v1/delivery', deliveryRouter);
 app.use('/api/v1/meta', metaRouter);
 app.use('/api/v1/reviews', reviewRouter);
+app.use('/api/v1/seller', sellerRouter);
+app.use('/api/v1/dss', dssRouter);
 
 app.use(notFound);
 app.use(errorHandler);

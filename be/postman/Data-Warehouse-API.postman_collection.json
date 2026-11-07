@@ -1,0 +1,351 @@
+{
+  "info": {
+    "_postman_id": "f7b3b9c9-3e4d-4c7b-8c1f-olist-dw-api",
+    "name": "Data Warehouse API",
+    "description": "Postman collection for the Express TypeScript Data Warehouse API. Set the baseUrl variable before running.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" },
+    { "key": "sellerId", "value": "seller-id-here" },
+    { "key": "from", "value": "2018-01-01" },
+    { "key": "to", "value": "2018-12-31" },
+    { "key": "state", "value": "SP" },
+    { "key": "scorecardWeights", "value": "gmv:0.2,late_rate:0.5,low_review_rate:0.3" },
+    { "key": "city", "value": "sao paulo" },
+    { "key": "category", "value": "beleza_saude" }
+  ],
+  "item": [
+    {
+      "name": "System",
+      "item": [
+        {
+          "name": "Server information",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/"
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+            "pm.test('Response contains server information', function () {",
+            "  const json = pm.response.json();",
+            "  pm.expect(json.data).to.have.property('name');",
+            "  pm.expect(json.data).to.have.property('version');",
+            "});"
+          ], "type": "text/javascript" } }]
+        },
+        {
+          "name": "Health check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/health"
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+            "pm.test('Health status is ok', function () { pm.expect(pm.response.json().data.status).to.eql('ok'); });"
+          ], "type": "text/javascript" } }]
+        },
+        {
+          "name": "Database health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/db-health"
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Database health responds successfully', function () { pm.response.to.have.status(200); });",
+            "pm.test('Database is connected', function () { pm.expect(pm.response.json().database).to.eql('connected'); });"
+          ], "type": "text/javascript" } }]
+        }
+      ]
+    },
+    {
+      "name": "Metadata",
+      "item": [
+        {
+          "name": "List analysis dimensions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/meta/dimensions"
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+            "pm.test('Dimensions are returned', function () { pm.expect(pm.response.json().data).to.be.an('array').that.is.not.empty; });"
+          ], "type": "text/javascript" } }]
+        }
+      ]
+    },
+    {
+      "name": "Sales",
+      "item": [
+        {
+          "name": "Sales analysis - time",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/sale/analysis?dim=time&depth=3&from={{from}}&to={{to}}&year=2018&quarter=1&month=1&status=delivered",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "sale", "analysis"],
+              "query": [
+                { "key": "dim", "value": "time" },
+                { "key": "depth", "value": "3" },
+                { "key": "from", "value": "{{from}}" },
+                { "key": "to", "value": "{{to}}" },
+                { "key": "year", "value": "2018" },
+                { "key": "quarter", "value": "1" },
+                { "key": "month", "value": "1" },
+                { "key": "status", "value": "delivered" }
+              ]
+            }
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+            "pm.test('Analysis response has data', function () { const json = pm.response.json(); pm.expect(json.dim).to.eql('time'); pm.expect(json.data).to.be.an('array'); });"
+          ], "type": "text/javascript" } }]
+        },
+        {
+          "name": "Sales analysis - seller geography",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/sale/analysis?dim=seller_geo&depth=2&state={{state}}&city={{city}}"
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+            "pm.test('Seller geography response is valid', function () { pm.expect(pm.response.json().dim).to.eql('seller_geo'); });"
+          ], "type": "text/javascript" } }]
+        },
+        {
+          "name": "Sales analysis - product",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/sale/analysis?dim=product&depth=2&category={{category}}"
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+            "pm.test('Product response is valid', function () { pm.expect(pm.response.json().dim).to.eql('product'); });"
+          ], "type": "text/javascript" } }]
+        },
+        {
+          "name": "Sales validation - invalid dimension",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/sale/analysis?dim=invalid"
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status is 400', function () { pm.response.to.have.status(400); });",
+            "pm.test('Validation error is returned', function () { pm.expect(pm.response.json()).to.have.property('error'); });"
+          ], "type": "text/javascript" } }]
+        }
+      ]
+    },
+    {
+      "name": "Delivery",
+      "item": [
+        {
+          "name": "Delivery analysis - time",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/delivery/analysis?dim=time&depth=3&from={{from}}&to={{to}}&year=2018"
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+            "pm.test('Delivery analysis has data', function () { pm.expect(pm.response.json().data).to.be.an('array'); });"
+          ], "type": "text/javascript" } }]
+        },
+        {
+          "name": "Delivery analysis - customer geography",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/delivery/analysis?dim=customer_geo&depth=2&state={{state}}&city={{city}}"
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+            "pm.test('Customer geography response is valid', function () { pm.expect(pm.response.json().dim).to.eql('customer_geo'); });"
+          ], "type": "text/javascript" } }]
+        },
+        {
+          "name": "Delivery delay distribution",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/delivery/distribution?dim=time&year=2018&state={{state}}"
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+            "pm.test('Distribution has summary and data', function () { const json = pm.response.json(); pm.expect(json).to.have.property('summary'); pm.expect(json.data).to.be.an('array'); });"
+          ], "type": "text/javascript" } }]
+        },
+        {
+          "name": "Delivery validation - invalid dimension",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/delivery/analysis?dim=invalid"
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status is 400', function () { pm.response.to.have.status(400); });",
+            "pm.test('Validation error is returned', function () { pm.expect(pm.response.json()).to.have.property('error'); });"
+          ], "type": "text/javascript" } }]
+        }
+      ]
+    },
+    {
+      "name": "Reviews",
+      "item": [
+        {
+          "name": "Reviews by delay - bucket",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/reviews/by-delay?group=bucket&from={{from}}&to={{to}}"
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+            "pm.test('Bucket review response is valid', function () { const json = pm.response.json(); pm.expect(json.meta.group).to.eql('bucket'); pm.expect(json.data).to.be.an('array'); });"
+          ], "type": "text/javascript" } }]
+        },
+        {
+          "name": "Reviews by delay - flag",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/reviews/by-delay?group=flag&state={{state}}"
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+            "pm.test('Flag review response is valid', function () { pm.expect(pm.response.json().meta.group).to.eql('flag'); });"
+          ], "type": "text/javascript" } }]
+        },
+        {
+          "name": "Reviews validation - invalid group",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/reviews/by-delay?group=invalid"
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status is 400', function () { pm.response.to.have.status(400); });",
+            "pm.test('Validation error is returned', function () { pm.expect(pm.response.json()).to.have.property('error'); });"
+          ], "type": "text/javascript" } }]
+        }
+      ]
+    },
+    {
+      "name": "Sellers",
+      "item": [
+        {
+          "name": "List sellers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/seller/?state={{state}}&page=1&limit=20&sort=total_orders&order=desc"
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+            "pm.test('Seller list has pagination', function () { const json = pm.response.json(); pm.expect(json.data).to.be.an('array'); pm.expect(json.pagination).to.have.property('total_pages'); });",
+            "const rows = pm.response.json().data; if (rows.length > 0 && rows[0].seller_id) { pm.collectionVariables.set('sellerId', rows[0].seller_id); }"
+          ], "type": "text/javascript" } }]
+        },
+        {
+          "name": "Seller detail",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/seller/{{sellerId}}"
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Seller detail returns a valid response', function () { pm.expect([200, 404]).to.include(pm.response.code); });",
+            "if (pm.response.code === 200) { pm.test('Seller detail has data', function () { pm.expect(pm.response.json().data).to.be.an('object'); }); }"
+          ], "type": "text/javascript" } }]
+        },
+        {
+          "name": "Seller validation - invalid filters",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/seller/?state=invalid&page=0&limit=101"
+          },
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status is 400', function () { pm.response.to.have.status(400); });",
+            "pm.test('Validation error is returned', function () { pm.expect(pm.response.json()).to.have.property('error'); });"
+          ], "type": "text/javascript" } }]
+        },
+        {
+          "name": "DSS",
+          "item": [
+            {
+              "name": "Seller scorecard - default",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/dss/seller-scorecard?limit=10",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "v1", "dss", "seller-scorecard"],
+                  "query": [{ "key": "limit", "value": "10" }]
+                }
+              },
+              "event": [{ "listen": "test", "script": { "exec": [
+                "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                "pm.test('Scorecard response is valid', function () { const json = pm.response.json(); pm.expect(json.data).to.be.an('array'); pm.expect(json.pagination).to.have.property('total'); });"
+              ], "type": "text/javascript" } }]
+            },
+            {
+              "name": "Seller scorecard - state and weights",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/dss/seller-scorecard?state={{state}}&weights={{scorecardWeights}}",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "v1", "dss", "seller-scorecard"],
+                  "query": [
+                    { "key": "state", "value": "{{state}}" },
+                    { "key": "weights", "value": "{{scorecardWeights}}" }
+                  ]
+                }
+              },
+              "event": [{ "listen": "test", "script": { "exec": [
+                "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                "pm.test('Custom weights are returned', function () { const json = pm.response.json(); pm.expect(json.weights).to.be.an('array'); pm.expect(json.weights.map(function (item) { return item.criterion; })).to.include.members(['gmv', 'late_rate', 'low_review_rate']); });"
+              ], "type": "text/javascript" } }]
+            },
+            {
+              "name": "DSS configuration",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v1/dss/config"
+              },
+              "event": [{ "listen": "test", "script": { "exec": [
+                "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                "pm.test('DSS config has weights, rules and settings', function () { const data = pm.response.json().data; pm.expect(data.weights).to.be.an('array'); pm.expect(data.rules).to.be.an('array'); pm.expect(data.settings).to.be.an('object'); });"
+              ], "type": "text/javascript" } }]
+            },
+            {
+              "name": "Seller scorecard validation - invalid weights",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v1/dss/seller-scorecard?weights=unknown:0.5"
+              },
+              "event": [{ "listen": "test", "script": { "exec": [
+                "pm.test('Status is 400', function () { pm.response.to.have.status(400); });",
+                "pm.test('Validation error is returned', function () { pm.expect(pm.response.json()).to.have.property('error'); });"
+              ], "type": "text/javascript" } }]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

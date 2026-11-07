@@ -336,7 +336,74 @@ GET /api/v1/reviews/by-delay?group=flag&state=SP
 `avg_score`, `avg_late`, `avg_ok` là điểm review trung bình. `low_review_rate`
 và `p0` là tỷ lệ từ `0` đến `1`.
 
-### 7. Error response
+### 7. Seller scorecard (DSS)
+
+#### `GET /api/v1/dss/seller-scorecard`
+
+Tính điểm và gắn nhãn cho seller dựa trên GMV, tỷ lệ giao trễ và tỷ lệ review
+thấp. Kết quả được sắp xếp theo `score` giảm dần; seller chưa đủ dữ liệu được
+trả về sau nhóm seller đủ tin cậy với `score` bằng `null`.
+
+| Parameter | Required | Values/example | Description |
+| --------- | -------: | --------------- | ----------- |
+| `limit` | No | `10` | Số seller trả về, từ `1` đến `100`. Mặc định `50`. |
+| `state` | No | `SP` | Seller state gồm đúng 2 chữ cái in hoa. |
+| `weights` | No | `gmv:0.2,late_rate:0.5,low_review_rate:0.3` | Override trọng số; mỗi giá trị từ `0` đến `1`. Các tiêu chí không truyền sẽ dùng cấu hình trong database. |
+
+Ví dụ:
+
+```text
+GET /api/v1/dss/seller-scorecard?limit=10
+GET /api/v1/dss/seller-scorecard?state=SP&weights=gmv:0.2,late_rate:0.5,low_review_rate:0.3
+```
+
+Response:
+
+```json
+{
+  "data": [
+    {
+      "seller_id": "seller-id",
+      "seller_state": "SP",
+      "gmv": 12345.67,
+      "late_rate": 0.08,
+      "low_review_rate": 0.1,
+      "rank": 1,
+      "score": 0.82,
+      "gmv_pct": 0.95,
+      "parts": {
+        "gmv": 0.9,
+        "late_rate": 0.8,
+        "low_review_rate": 0.75
+      },
+      "label": "Retain",
+      "action": "Hiệu quả tốt",
+      "freight_ratio": 0.12
+    }
+  ],
+  "pagination": {
+    "limit": 10,
+    "total": 120
+  },
+  "weights": [
+    { "criterion": "gmv", "weight": 0.2, "direction": "higher" }
+  ]
+}
+```
+
+#### `GET /api/v1/dss/config`
+
+Trả về cấu hình hiện tại của DSS gồm `weights`, `rules` và `settings`.
+
+```text
+GET /api/v1/dss/config
+```
+
+`weights` gồm các tiêu chí `gmv`, `late_rate`, `low_review_rate`; `direction`
+là `higher` hoặc `lower`. `settings` gồm ngưỡng số đơn tối thiểu và ngưỡng GMV
+cho seller chưa đủ dữ liệu nhưng có doanh số cao.
+
+### 8. Error response
 
 Validation error dùng HTTP `400`:
 

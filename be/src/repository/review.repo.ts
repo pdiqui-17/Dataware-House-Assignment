@@ -41,8 +41,8 @@ export const reviewByDelay = async ({
 
   const groupExpression =
     group === ReviewGroup.BUCKET
-      ? 'orv.delay_bucket'
-      : `CASE WHEN orv.is_delayed THEN 'late' ELSE 'not_late' END`;
+      ? 'f.delay_bucket'
+      : `CASE WHEN f.is_delayed THEN 'late' ELSE 'not_late' END`;
 
   const sql = `
     WITH filtered AS (
@@ -77,7 +77,7 @@ export const reviewByDelay = async ({
       summary.p0,
       summary.avg_late,
       summary.avg_ok
-    FROM filtered
+    FROM filtered f
     CROSS JOIN summary
     GROUP BY ${groupExpression}, summary.total_orders,
       summary.orders_with_review, summary.orders_without_review,

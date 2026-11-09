@@ -15,7 +15,9 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "dss:delivery:profile": "tsx src/scripts/dss-delivery-profile.ts",
+    "dss:delivery:build": "tsx src/scripts/dss-delivery-build.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",

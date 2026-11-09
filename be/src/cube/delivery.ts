@@ -1,4 +1,5 @@
 import type { CubeConfig } from '../engine/buildQuery.js';
+import { deliveryDelayBucketSql } from '../model/pivot.model.js';
 
 export const delivery = {
   name: 'delivery',
@@ -48,14 +49,7 @@ export const deliverDistribution = {
             d.month,
             c.customer_state,
             c.customer_city,
-            CASE
-              WHEN f.delay_days <= -8 THEN 'early_8plus'
-              WHEN f.delay_days < 0 THEN 'early_1_7'
-              WHEN f.delay_days = 0 THEN 'on_time'
-              WHEN f.delay_days <= 3 THEN 'late_1_3'
-              WHEN f.delay_days <= 7 THEN 'late_4_7'
-              ELSE 'late_8plus'
-            END AS bucket
+            ${deliveryDelayBucketSql('f.delay_days')} AS bucket
           FROM dw.fact_delivery_order f
           JOIN dw.dim_date d ON d.date_key = f.purchase_date_key
           JOIN dw.dim_customer c ON c.customer_key = f.customer_key

@@ -256,7 +256,76 @@ Response:
 
 `pct` và `late_rate` là phần trăm, không phải tỷ lệ từ 0 đến 1.
 
-### 6. Review theo độ trễ
+### 6. Pivot OLAP
+
+Pivot adds a two-dimensional cross-tab for sales and delivery. Choose one axis for rows (`rows`), one for columns (`cols`), and one measure for each cell. Rotate the table by swapping `rows` and `cols`.
+
+#### `GET /api/v1/sale/pivot`
+
+#### `GET /api/v1/delivery/pivot`
+
+Both endpoints require distinct `rows` and `cols`. `measure` is optional. Date, time, geography, and business filters follow the corresponding analysis endpoint.
+
+| Parameter | Description |
+| --- | --- |
+| `rows`, `cols` | Row and column axes from the cube whitelist |
+| `measure` | Measure to calculate; defaults to `total_price` for sales and `late_rate` for delivery |
+| `from`, `to` | Inclusive purchase date range in `YYYY-MM-DD` format |
+| `year`, `quarter`, `month` | Time filters; quarter is 1-4 and month is 1-12 |
+| `state`, `city` | Seller geography for sales; customer geography for delivery |
+| `category`, `status` | Sales only; `status` is a comma-separated list |
+| `max_rows`, `max_cols` | Display limits from 1 to 50; defaults are 20 and 10 |
+
+Sales axes: `year`, `year_quarter`, `year_month`, `seller_state`, `seller_city`, `category`, `order_status`.
+
+Sales measures: `total_price`, `total_freight`, `n_orders`, `n_items`.
+
+Delivery axes: `year`, `year_quarter`, `year_month`, `customer_state`, `customer_city`, `delay_bucket`.
+
+Delivery measures: `eligible_orders`, `late_orders`, `late_rate`, `avg_delivery_days`, `avg_delay_days`. `late_rate` is a ratio from 0 to 1. With `delay_bucket`, only `eligible_orders` and `avg_delivery_days` are accepted; all six buckets are always returned in fixed order.
+
+Examples:
+
+```text
+GET /api/v1/sale/pivot?rows=year_month&cols=category&measure=total_price&year=2018
+GET /api/v1/delivery/pivot?rows=year_month&cols=customer_state&measure=late_rate
+```
+
+The response contains `row_headers`, `col_headers`, `matrix`, row and column totals, and `grand_total`. `matrix[i][j]` corresponds to the headers at the same indexes; a missing cell is `null`. Totals are calculated directly from filtered fact rows, not from visible cells. `meta.truncated` indicates whether rows or columns were limited; `meta.total_rows` and `meta.total_cols` report cardinality before the limit.
+
+```json
+{
+  "cube": "sales",
+  "rows": "year_month",
+  "cols": "category",
+  "measure": "total_price",
+  "meta": {
+    "filters": { "year": 2018, "status": ["delivered"] },
+    "unit": "currency",
+    "n_rows": 8,
+    "n_cols": 10,
+    "total_rows": 8,
+    "total_cols": 71,
+    "truncated": { "rows": false, "cols": true },
+    "notes": ["Totals are calculated directly from filtered fact rows."]
+  },
+  "row_headers": [{ "key": "2018-01", "label": "2018-01" }],
+  "col_headers": [{ "key": "beleza_saude", "label": "health_beauty" }],
+  "matrix": [[12345.67]],
+  "row_totals": [98765.43],
+  "col_totals": [12345.67],
+  "grand_total": 543210.98
+}
+```
+
+An empty result still returns HTTP 200 with empty header lists and matrix, and `grand_total: null`. Invalid parameters return HTTP 400 as `{ "error": "..." }`. Sales defaults to `delivered`, except when `order_status` is an axis and no `status` is provided.
+
+#### `GET /api/v1/meta/pivot`
+
+Returns the axes and measures whitelist for both cubes, including each key, label, kind, and unit. Metadata is generated from the same configuration used to validate pivot requests.
+
+### 7. Review theo độ trễ
+
 
 #### `GET /api/v1/reviews/by-delay`
 
@@ -336,7 +405,7 @@ GET /api/v1/reviews/by-delay?group=flag&state=SP
 `avg_score`, `avg_late`, `avg_ok` là điểm review trung bình. `low_review_rate`
 và `p0` là tỷ lệ từ `0` đến `1`.
 
-### 7. Seller scorecard (DSS)
+### 8. Seller scorecard (DSS)
 
 #### `GET /api/v1/dss/seller-scorecard`
 
@@ -344,11 +413,11 @@ Tính điểm và gắn nhãn cho seller dựa trên GMV, tỷ lệ giao trễ v
 thấp. Kết quả được sắp xếp theo `score` giảm dần; seller chưa đủ dữ liệu được
 trả về sau nhóm seller đủ tin cậy với `score` bằng `null`.
 
-| Parameter | Required | Values/example | Description |
-| --------- | -------: | --------------- | ----------- |
-| `limit` | No | `10` | Số seller trả về, từ `1` đến `100`. Mặc định `50`. |
-| `state` | No | `SP` | Seller state gồm đúng 2 chữ cái in hoa. |
-| `weights` | No | `gmv:0.2,late_rate:0.5,low_review_rate:0.3` | Override trọng số; mỗi giá trị từ `0` đến `1`. Các tiêu chí không truyền sẽ dùng cấu hình trong database. |
+| Parameter | Required | Values/example                              | Description                                                                                               |
+| --------- | -------: | ------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `limit`   |       No | `10`                                        | Số seller trả về, từ `1` đến `100`. Mặc định `50`.                                                        |
+| `state`   |       No | `SP`                                        | Seller state gồm đúng 2 chữ cái in hoa.                                                                   |
+| `weights` |       No | `gmv:0.2,late_rate:0.5,low_review_rate:0.3` | Override trọng số; mỗi giá trị từ `0` đến `1`. Các tiêu chí không truyền sẽ dùng cấu hình trong database. |
 
 Ví dụ:
 
@@ -385,9 +454,7 @@ Response:
     "limit": 10,
     "total": 120
   },
-  "weights": [
-    { "criterion": "gmv", "weight": 0.2, "direction": "higher" }
-  ]
+  "weights": [{ "criterion": "gmv", "weight": 0.2, "direction": "higher" }]
 }
 ```
 
@@ -403,7 +470,94 @@ GET /api/v1/dss/config
 là `higher` hoặc `lower`. `settings` gồm ngưỡng số đơn tối thiểu và ngưỡng GMV
 cho seller chưa đủ dữ liệu nhưng có doanh số cao.
 
-### 8. Error response
+#### `GET /api/v1/dss/delivery-buffer` (Module B)
+
+Đọc chính sách cam kết giao hàng đã được build. API so sánh ba chính sách trên
+cùng tập test: `state_k` (mỗi bang một `k`), `global_k` (dùng chung `k` của toàn
+sàn) và `current_k0` (giữ nguyên cam kết, `k = 0`). Endpoint chỉ đọc dữ liệu đã
+lưu trong DSS; cần chạy pipeline trước.
+
+| Parameter          | Required | Values/example | Description                                                                                                                |
+| ------------------ | -------: | -------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `state`            |       No | `SP`           | Bang khách hàng gồm đúng 2 chữ cái in hoa. Có tham số này thì trả chi tiết một bang; bỏ qua để nhận tổng hợp toàn bộ bang. |
+| `target_late_rate` |       No | `0.05`         | Tỷ lệ trễ mục tiêu trong khoảng `(0, 1)`. Mặc định `0.05`.                                                                 |
+| `k_min`            |       No | `-10`          | Cận dưới nguyên của dải `k` cần trả về. Mặc định `-10`; phải nằm trong dải đã build.                                       |
+| `k_max`            |       No | `10`           | Cận trên nguyên của dải `k` cần trả về. Mặc định `10`; phải nằm trong dải đã build và không nhỏ hơn `k_min`.               |
+| `run_id`           |       No | `12`           | Run cụ thể cần đọc. Mặc định là run `is_active`; run không tồn tại trả `404`.                                              |
+
+Ví dụ:
+
+```text
+GET /api/v1/dss/delivery-buffer
+GET /api/v1/dss/delivery-buffer?state=SP
+GET /api/v1/dss/delivery-buffer?state=RJ&target_late_rate=0.05&k_min=-5&k_max=20
+GET /api/v1/dss/delivery-buffer?run_id=12
+```
+
+Khi truyền `state`, response có `current`, `recommended`, `global_comparison` và
+`curve`. `recommended` gồm `k`, tỷ lệ trễ train/test, review kỳ vọng, trạng thái
+đánh giá, khoảng tin cậy Wilson 95% và số đơn test. Bang có ít hơn
+`minSegmentNTrain` dùng `k` của toàn sàn và được đánh dấu `fallback: true`.
+
+Khi bỏ `state`, `data.summary` chứa kết quả tổng hợp của ba chính sách;
+`data.segments` chứa kết quả riêng từng bang. `low_power` không được tính vào số
+bang được chấm hoặc `pct_orders_in_met`, nhưng vẫn có trọng số trong `late_rate`
+gộp toàn sàn.
+
+Các trạng thái đánh giá:
+
+- `met`: tỷ lệ trễ test `<= target_late_rate`.
+- `missed`: tỷ lệ trễ test `> target_late_rate`.
+- `low_power`: số đơn test thấp hơn `minSegmentNTest`, chưa đủ cơ sở kết luận.
+- `significantly_above_target`: cận dưới Wilson 95% lớn hơn `target_late_rate`.
+
+Nếu chưa có run hoạt động, API trả `404`. Giá trị tham số không hợp lệ hoặc
+`k_min`/`k_max` nằm ngoài dải đã build trả `400`.
+
+#### `GET /api/v1/dss/delivery-buffer/tradeoff`
+
+Trả bảng so sánh đánh đổi giữa các `safety_margin` đã build cho cùng một khoảng
+train/test. Mặc định dùng khoảng thời gian của run đang hoạt động. Nếu truyền
+`split_date` và `test_end`, phải truyền cả hai; không tìm thấy run phù hợp trả
+`404`.
+
+| Parameter    | Required | Values/example | Description                                     |
+| ------------ | -------: | -------------- | ----------------------------------------------- |
+| `split_date` |       No | `2018-03-01`   | Ngày bắt đầu tập test, định dạng `YYYY-MM-DD`.  |
+| `test_end`   |       No | `2018-08-31`   | Ngày kết thúc tập test, định dạng `YYYY-MM-DD`. |
+
+Ví dụ:
+
+```text
+GET /api/v1/dss/delivery-buffer/tradeoff
+GET /api/v1/dss/delivery-buffer/tradeoff?split_date=2018-03-01&test_end=2018-08-31
+```
+
+Mỗi dòng `data` gồm `run_id`, `safety_margin`, `late_rate`,
+`promised_days_avg`, `n_segments_scored`, `n_segments_met`, `pct_orders_in_met`,
+`worst_segment` và `worst_late_rate`. Nếu đã build lại cùng một margin nhiều lần,
+endpoint trả run mới nhất cho margin đó; các dòng được sắp theo margin tăng dần.
+
+#### Build dữ liệu cho Module B
+
+Trên database mới, áp dụng `src/sql/006_delivery_policy.sql` để tạo view và các
+bảng v1 trước. Sau đó áp dụng `src/sql/006_delivery_policy_v2.sql` trước lần
+build v2 đầu tiên. Khi nâng cấp database đã chạy v1, chỉ cần áp dụng migration
+v2. Migration v2 xóa các run delivery policy cũ vì chúng dùng trạng thái
+`passed`/`failed`; chỉ chạy migration này một lần.
+
+```powershell
+npm run dss:delivery:profile
+npm run dss:delivery:build -- --split-date 2018-03-01 --test-end 2018-08-31
+npm run dss:delivery:build -- --split-date 2018-03-01 --test-end 2018-08-31 --margins 0,0.005,0.01
+```
+
+Profile xuất tỷ lệ đủ điều kiện theo tháng để kiểm tra thiên lệch ở các tháng
+cuối. Margin sweep tạo một run cho mỗi giá trị; run có margin bằng
+`defaultConfig.safetyMargin` được kích hoạt. Không kết hợp `--margins` với
+`--split-dates`. Báo cáo JSON/CSV được ghi vào `reports/delivery_policy/`.
+
+### 9. Error response
 
 Validation error dùng HTTP `400`:
 
@@ -430,6 +584,9 @@ Resource không tồn tại dùng HTTP `404`:
 - `npm run lint`: ESLint
 - `npm run format`: Prettier
 - `npm test`: run tests
+- `npm run dss:delivery:profile`: profile monthly delivery completeness and delay distribution
+- `npm run dss:delivery:build -- --split-date <date> --test-end <date>`: build a delivery policy run
+- Add `--margins 0,0.005,0.01` to build and compare safety margins; do not combine it with `--split-dates`
 
 ## Structure
 
@@ -438,6 +595,12 @@ src/
   app.ts                 # Configure Express and middleware
   server.ts              # Listen, graceful shutdown
   config/env.ts          # Validate environment variables
+  controller/            # HTTP request handlers, including DSS delivery policy
+  model/                 # Scorecard and delivery-policy calculations
+  repository/            # Parameterized PostgreSQL queries
+  scripts/               # Delivery profile and build commands
+  service/               # DSS business logic
+  sql/                   # Warehouse views and DSS migrations
   lib/logger.ts           # Shared structured logger
   middleware/
     error-handler.ts     # Central error handler

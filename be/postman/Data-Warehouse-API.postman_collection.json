@@ -6,14 +6,38 @@
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
-    { "key": "baseUrl", "value": "http://localhost:3000" },
-    { "key": "sellerId", "value": "seller-id-here" },
-    { "key": "from", "value": "2018-01-01" },
-    { "key": "to", "value": "2018-12-31" },
-    { "key": "state", "value": "SP" },
-    { "key": "scorecardWeights", "value": "gmv:0.2,late_rate:0.5,low_review_rate:0.3" },
-    { "key": "city", "value": "sao paulo" },
-    { "key": "category", "value": "beleza_saude" }
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "sellerId",
+      "value": "seller-id-here"
+    },
+    {
+      "key": "from",
+      "value": "2018-01-01"
+    },
+    {
+      "key": "to",
+      "value": "2018-12-31"
+    },
+    {
+      "key": "state",
+      "value": "SP"
+    },
+    {
+      "key": "scorecardWeights",
+      "value": "gmv:0.2,late_rate:0.5,low_review_rate:0.3"
+    },
+    {
+      "key": "city",
+      "value": "sao paulo"
+    },
+    {
+      "key": "category",
+      "value": "beleza_saude"
+    }
   ],
   "item": [
     {
@@ -26,14 +50,22 @@
             "header": [],
             "url": "{{baseUrl}}/"
           },
-          "event": [{ "listen": "test", "script": { "exec": [
-            "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
-            "pm.test('Response contains server information', function () {",
-            "  const json = pm.response.json();",
-            "  pm.expect(json.data).to.have.property('name');",
-            "  pm.expect(json.data).to.have.property('version');",
-            "});"
-          ], "type": "text/javascript" } }]
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Response contains server information', function () {",
+                  "  const json = pm.response.json();",
+                  "  pm.expect(json.data).to.have.property('name');",
+                  "  pm.expect(json.data).to.have.property('version');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
         },
         {
           "name": "Health check",
@@ -42,10 +74,18 @@
             "header": [],
             "url": "{{baseUrl}}/api/v1/health"
           },
-          "event": [{ "listen": "test", "script": { "exec": [
-            "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
-            "pm.test('Health status is ok', function () { pm.expect(pm.response.json().data.status).to.eql('ok'); });"
-          ], "type": "text/javascript" } }]
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Health status is ok', function () { pm.expect(pm.response.json().data.status).to.eql('ok'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
         },
         {
           "name": "Database health",
@@ -54,10 +94,18 @@
             "header": [],
             "url": "{{baseUrl}}/api/v1/db-health"
           },
-          "event": [{ "listen": "test", "script": { "exec": [
-            "pm.test('Database health responds successfully', function () { pm.response.to.have.status(200); });",
-            "pm.test('Database is connected', function () { pm.expect(pm.response.json().database).to.eql('connected'); });"
-          ], "type": "text/javascript" } }]
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Database health responds successfully', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Database is connected', function () { pm.expect(pm.response.json().database).to.eql('connected'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
         }
       ]
     },
@@ -71,10 +119,18 @@
             "header": [],
             "url": "{{baseUrl}}/api/v1/meta/dimensions"
           },
-          "event": [{ "listen": "test", "script": { "exec": [
-            "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
-            "pm.test('Dimensions are returned', function () { pm.expect(pm.response.json().data).to.be.an('array').that.is.not.empty; });"
-          ], "type": "text/javascript" } }]
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Dimensions are returned', function () { pm.expect(pm.response.json().data).to.be.an('array').that.is.not.empty; });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
         }
       ]
     },
@@ -88,24 +144,63 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/v1/sale/analysis?dim=time&depth=3&from={{from}}&to={{to}}&year=2018&quarter=1&month=1&status=delivered",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "v1", "sale", "analysis"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "sale",
+                "analysis"
+              ],
               "query": [
-                { "key": "dim", "value": "time" },
-                { "key": "depth", "value": "3" },
-                { "key": "from", "value": "{{from}}" },
-                { "key": "to", "value": "{{to}}" },
-                { "key": "year", "value": "2018" },
-                { "key": "quarter", "value": "1" },
-                { "key": "month", "value": "1" },
-                { "key": "status", "value": "delivered" }
+                {
+                  "key": "dim",
+                  "value": "time"
+                },
+                {
+                  "key": "depth",
+                  "value": "3"
+                },
+                {
+                  "key": "from",
+                  "value": "{{from}}"
+                },
+                {
+                  "key": "to",
+                  "value": "{{to}}"
+                },
+                {
+                  "key": "year",
+                  "value": "2018"
+                },
+                {
+                  "key": "quarter",
+                  "value": "1"
+                },
+                {
+                  "key": "month",
+                  "value": "1"
+                },
+                {
+                  "key": "status",
+                  "value": "delivered"
+                }
               ]
             }
           },
-          "event": [{ "listen": "test", "script": { "exec": [
-            "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
-            "pm.test('Analysis response has data', function () { const json = pm.response.json(); pm.expect(json.dim).to.eql('time'); pm.expect(json.data).to.be.an('array'); });"
-          ], "type": "text/javascript" } }]
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Analysis response has data', function () { const json = pm.response.json(); pm.expect(json.dim).to.eql('time'); pm.expect(json.data).to.be.an('array'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
         },
         {
           "name": "Sales analysis - seller geography",
@@ -114,10 +209,18 @@
             "header": [],
             "url": "{{baseUrl}}/api/v1/sale/analysis?dim=seller_geo&depth=2&state={{state}}&city={{city}}"
           },
-          "event": [{ "listen": "test", "script": { "exec": [
-            "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
-            "pm.test('Seller geography response is valid', function () { pm.expect(pm.response.json().dim).to.eql('seller_geo'); });"
-          ], "type": "text/javascript" } }]
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Seller geography response is valid', function () { pm.expect(pm.response.json().dim).to.eql('seller_geo'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
         },
         {
           "name": "Sales analysis - product",
@@ -126,10 +229,18 @@
             "header": [],
             "url": "{{baseUrl}}/api/v1/sale/analysis?dim=product&depth=2&category={{category}}"
           },
-          "event": [{ "listen": "test", "script": { "exec": [
-            "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
-            "pm.test('Product response is valid', function () { pm.expect(pm.response.json().dim).to.eql('product'); });"
-          ], "type": "text/javascript" } }]
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Product response is valid', function () { pm.expect(pm.response.json().dim).to.eql('product'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
         },
         {
           "name": "Sales validation - invalid dimension",
@@ -138,10 +249,18 @@
             "header": [],
             "url": "{{baseUrl}}/api/v1/sale/analysis?dim=invalid"
           },
-          "event": [{ "listen": "test", "script": { "exec": [
-            "pm.test('Status is 400', function () { pm.response.to.have.status(400); });",
-            "pm.test('Validation error is returned', function () { pm.expect(pm.response.json()).to.have.property('error'); });"
-          ], "type": "text/javascript" } }]
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 400', function () { pm.response.to.have.status(400); });",
+                  "pm.test('Validation error is returned', function () { pm.expect(pm.response.json()).to.have.property('error'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
         }
       ]
     },
@@ -155,10 +274,18 @@
             "header": [],
             "url": "{{baseUrl}}/api/v1/delivery/analysis?dim=time&depth=3&from={{from}}&to={{to}}&year=2018"
           },
-          "event": [{ "listen": "test", "script": { "exec": [
-            "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
-            "pm.test('Delivery analysis has data', function () { pm.expect(pm.response.json().data).to.be.an('array'); });"
-          ], "type": "text/javascript" } }]
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Delivery analysis has data', function () { pm.expect(pm.response.json().data).to.be.an('array'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
         },
         {
           "name": "Delivery analysis - customer geography",
@@ -167,10 +294,18 @@
             "header": [],
             "url": "{{baseUrl}}/api/v1/delivery/analysis?dim=customer_geo&depth=2&state={{state}}&city={{city}}"
           },
-          "event": [{ "listen": "test", "script": { "exec": [
-            "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
-            "pm.test('Customer geography response is valid', function () { pm.expect(pm.response.json().dim).to.eql('customer_geo'); });"
-          ], "type": "text/javascript" } }]
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Customer geography response is valid', function () { pm.expect(pm.response.json().dim).to.eql('customer_geo'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
         },
         {
           "name": "Delivery delay distribution",
@@ -179,10 +314,18 @@
             "header": [],
             "url": "{{baseUrl}}/api/v1/delivery/distribution?dim=time&year=2018&state={{state}}"
           },
-          "event": [{ "listen": "test", "script": { "exec": [
-            "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
-            "pm.test('Distribution has summary and data', function () { const json = pm.response.json(); pm.expect(json).to.have.property('summary'); pm.expect(json.data).to.be.an('array'); });"
-          ], "type": "text/javascript" } }]
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Distribution has summary and data', function () { const json = pm.response.json(); pm.expect(json).to.have.property('summary'); pm.expect(json.data).to.be.an('array'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
         },
         {
           "name": "Delivery validation - invalid dimension",
@@ -191,10 +334,18 @@
             "header": [],
             "url": "{{baseUrl}}/api/v1/delivery/analysis?dim=invalid"
           },
-          "event": [{ "listen": "test", "script": { "exec": [
-            "pm.test('Status is 400', function () { pm.response.to.have.status(400); });",
-            "pm.test('Validation error is returned', function () { pm.expect(pm.response.json()).to.have.property('error'); });"
-          ], "type": "text/javascript" } }]
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 400', function () { pm.response.to.have.status(400); });",
+                  "pm.test('Validation error is returned', function () { pm.expect(pm.response.json()).to.have.property('error'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
         }
       ]
     },
@@ -208,10 +359,18 @@
             "header": [],
             "url": "{{baseUrl}}/api/v1/reviews/by-delay?group=bucket&from={{from}}&to={{to}}"
           },
-          "event": [{ "listen": "test", "script": { "exec": [
-            "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
-            "pm.test('Bucket review response is valid', function () { const json = pm.response.json(); pm.expect(json.meta.group).to.eql('bucket'); pm.expect(json.data).to.be.an('array'); });"
-          ], "type": "text/javascript" } }]
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Bucket review response is valid', function () { const json = pm.response.json(); pm.expect(json.meta.group).to.eql('bucket'); pm.expect(json.data).to.be.an('array'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
         },
         {
           "name": "Reviews by delay - flag",
@@ -220,10 +379,18 @@
             "header": [],
             "url": "{{baseUrl}}/api/v1/reviews/by-delay?group=flag&state={{state}}"
           },
-          "event": [{ "listen": "test", "script": { "exec": [
-            "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
-            "pm.test('Flag review response is valid', function () { pm.expect(pm.response.json().meta.group).to.eql('flag'); });"
-          ], "type": "text/javascript" } }]
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Flag review response is valid', function () { pm.expect(pm.response.json().meta.group).to.eql('flag'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
         },
         {
           "name": "Reviews validation - invalid group",
@@ -232,10 +399,18 @@
             "header": [],
             "url": "{{baseUrl}}/api/v1/reviews/by-delay?group=invalid"
           },
-          "event": [{ "listen": "test", "script": { "exec": [
-            "pm.test('Status is 400', function () { pm.response.to.have.status(400); });",
-            "pm.test('Validation error is returned', function () { pm.expect(pm.response.json()).to.have.property('error'); });"
-          ], "type": "text/javascript" } }]
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 400', function () { pm.response.to.have.status(400); });",
+                  "pm.test('Validation error is returned', function () { pm.expect(pm.response.json()).to.have.property('error'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
         }
       ]
     },
@@ -249,11 +424,19 @@
             "header": [],
             "url": "{{baseUrl}}/api/v1/seller/?state={{state}}&page=1&limit=20&sort=total_orders&order=desc"
           },
-          "event": [{ "listen": "test", "script": { "exec": [
-            "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
-            "pm.test('Seller list has pagination', function () { const json = pm.response.json(); pm.expect(json.data).to.be.an('array'); pm.expect(json.pagination).to.have.property('total_pages'); });",
-            "const rows = pm.response.json().data; if (rows.length > 0 && rows[0].seller_id) { pm.collectionVariables.set('sellerId', rows[0].seller_id); }"
-          ], "type": "text/javascript" } }]
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Seller list has pagination', function () { const json = pm.response.json(); pm.expect(json.data).to.be.an('array'); pm.expect(json.pagination).to.have.property('total_pages'); });",
+                  "const rows = pm.response.json().data; if (rows.length > 0 && rows[0].seller_id) { pm.collectionVariables.set('sellerId', rows[0].seller_id); }"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
         },
         {
           "name": "Seller detail",
@@ -262,10 +445,18 @@
             "header": [],
             "url": "{{baseUrl}}/api/v1/seller/{{sellerId}}"
           },
-          "event": [{ "listen": "test", "script": { "exec": [
-            "pm.test('Seller detail returns a valid response', function () { pm.expect([200, 404]).to.include(pm.response.code); });",
-            "if (pm.response.code === 200) { pm.test('Seller detail has data', function () { pm.expect(pm.response.json().data).to.be.an('object'); }); }"
-          ], "type": "text/javascript" } }]
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Seller detail returns a valid response', function () { pm.expect([200, 404]).to.include(pm.response.code); });",
+                  "if (pm.response.code === 200) { pm.test('Seller detail has data', function () { pm.expect(pm.response.json().data).to.be.an('object'); }); }"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
         },
         {
           "name": "Seller validation - invalid filters",
@@ -274,10 +465,18 @@
             "header": [],
             "url": "{{baseUrl}}/api/v1/seller/?state=invalid&page=0&limit=101"
           },
-          "event": [{ "listen": "test", "script": { "exec": [
-            "pm.test('Status is 400', function () { pm.response.to.have.status(400); });",
-            "pm.test('Validation error is returned', function () { pm.expect(pm.response.json()).to.have.property('error'); });"
-          ], "type": "text/javascript" } }]
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 400', function () { pm.response.to.have.status(400); });",
+                  "pm.test('Validation error is returned', function () { pm.expect(pm.response.json()).to.have.property('error'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
         },
         {
           "name": "DSS",
@@ -289,15 +488,35 @@
                 "header": [],
                 "url": {
                   "raw": "{{baseUrl}}/api/v1/dss/seller-scorecard?limit=10",
-                  "host": ["{{baseUrl}}"],
-                  "path": ["api", "v1", "dss", "seller-scorecard"],
-                  "query": [{ "key": "limit", "value": "10" }]
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "dss",
+                    "seller-scorecard"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
                 }
               },
-              "event": [{ "listen": "test", "script": { "exec": [
-                "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
-                "pm.test('Scorecard response is valid', function () { const json = pm.response.json(); pm.expect(json.data).to.be.an('array'); pm.expect(json.pagination).to.have.property('total'); });"
-              ], "type": "text/javascript" } }]
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                      "pm.test('Scorecard response is valid', function () { const json = pm.response.json(); pm.expect(json.data).to.be.an('array'); pm.expect(json.pagination).to.have.property('total'); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
             },
             {
               "name": "Seller scorecard - state and weights",
@@ -306,18 +525,39 @@
                 "header": [],
                 "url": {
                   "raw": "{{baseUrl}}/api/v1/dss/seller-scorecard?state={{state}}&weights={{scorecardWeights}}",
-                  "host": ["{{baseUrl}}"],
-                  "path": ["api", "v1", "dss", "seller-scorecard"],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "dss",
+                    "seller-scorecard"
+                  ],
                   "query": [
-                    { "key": "state", "value": "{{state}}" },
-                    { "key": "weights", "value": "{{scorecardWeights}}" }
+                    {
+                      "key": "state",
+                      "value": "{{state}}"
+                    },
+                    {
+                      "key": "weights",
+                      "value": "{{scorecardWeights}}"
+                    }
                   ]
                 }
               },
-              "event": [{ "listen": "test", "script": { "exec": [
-                "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
-                "pm.test('Custom weights are returned', function () { const json = pm.response.json(); pm.expect(json.weights).to.be.an('array'); pm.expect(json.weights.map(function (item) { return item.criterion; })).to.include.members(['gmv', 'late_rate', 'low_review_rate']); });"
-              ], "type": "text/javascript" } }]
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                      "pm.test('Custom weights are returned', function () { const json = pm.response.json(); pm.expect(json.weights).to.be.an('array'); pm.expect(json.weights.map(function (item) { return item.criterion; })).to.include.members(['gmv', 'late_rate', 'low_review_rate']); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
             },
             {
               "name": "DSS configuration",
@@ -326,10 +566,18 @@
                 "header": [],
                 "url": "{{baseUrl}}/api/v1/dss/config"
               },
-              "event": [{ "listen": "test", "script": { "exec": [
-                "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
-                "pm.test('DSS config has weights, rules and settings', function () { const data = pm.response.json().data; pm.expect(data.weights).to.be.an('array'); pm.expect(data.rules).to.be.an('array'); pm.expect(data.settings).to.be.an('object'); });"
-              ], "type": "text/javascript" } }]
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                      "pm.test('DSS config has weights, rules and settings', function () { const data = pm.response.json().data; pm.expect(data.weights).to.be.an('array'); pm.expect(data.rules).to.be.an('array'); pm.expect(data.settings).to.be.an('object'); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
             },
             {
               "name": "Seller scorecard validation - invalid weights",
@@ -338,10 +586,553 @@
                 "header": [],
                 "url": "{{baseUrl}}/api/v1/dss/seller-scorecard?weights=unknown:0.5"
               },
-              "event": [{ "listen": "test", "script": { "exec": [
-                "pm.test('Status is 400', function () { pm.response.to.have.status(400); });",
-                "pm.test('Validation error is returned', function () { pm.expect(pm.response.json()).to.have.property('error'); });"
-              ], "type": "text/javascript" } }]
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test('Status is 400', function () { pm.response.to.have.status(400); });",
+                      "pm.test('Validation error is returned', function () { pm.expect(pm.response.json()).to.have.property('error'); });"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DSS - Delivery buffer",
+      "item": [
+        {
+          "name": "Policy for all states",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/dss/delivery-buffer",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "dss",
+                "delivery-buffer"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('All-state response includes policy summaries', function () { const data = pm.response.json().data; pm.expect(data.summary).to.have.property('state_k'); pm.expect(data.summary).to.have.property('global_k'); pm.expect(data.summary).to.have.property('current_k0'); pm.expect(data.segments).to.be.an('array'); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Policy for one state",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/dss/delivery-buffer",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "dss",
+                "delivery-buffer"
+              ],
+              "query": [
+                {
+                  "key": "state",
+                  "value": "{{state}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('State response includes three comparisons', function () { const data = pm.response.json().data; pm.expect(data.segment.customer_state).to.eql(pm.collectionVariables.get('state') || 'SP'); pm.expect(data).to.have.property('recommended'); pm.expect(data).to.have.property('global_comparison'); pm.expect(data.curve).to.be.an('array'); });",
+                  "pm.test('Curve is ordered and late rate does not increase', function () { const rows = pm.response.json().data.curve; for (let i = 1; i < rows.length; i += 1) { pm.expect(rows[i].k).to.be.above(rows[i - 1].k); pm.expect(rows[i].late_rate_train).to.be.at.most(rows[i - 1].late_rate_train); } });",
+                  "pm.test('Recommended training rate meets target unless unattainable', function () { const data = pm.response.json().data; if (data.segment.attainable) pm.expect(data.recommended.late_rate_train).to.be.at.most(0.05); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Validation - invalid state",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/dss/delivery-buffer",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "dss",
+                "delivery-buffer"
+              ],
+              "query": [
+                {
+                  "key": "state",
+                  "value": "invalid"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400', function () { pm.response.to.have.status(400); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Validation - zero target",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/dss/delivery-buffer",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "dss",
+                "delivery-buffer"
+              ],
+              "query": [
+                {
+                  "key": "target_late_rate",
+                  "value": "0"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400', function () { pm.response.to.have.status(400); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Validation - target above one",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/dss/delivery-buffer",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "dss",
+                "delivery-buffer"
+              ],
+              "query": [
+                {
+                  "key": "target_late_rate",
+                  "value": "1.5"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400', function () { pm.response.to.have.status(400); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Validation - inverted k range",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/dss/delivery-buffer",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "dss",
+                "delivery-buffer"
+              ],
+              "query": [
+                {
+                  "key": "k_min",
+                  "value": "5"
+                },
+                {
+                  "key": "k_max",
+                  "value": "-5"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 400', function () { pm.response.to.have.status(400); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Not found - unknown run",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/dss/delivery-buffer",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "dss",
+                "delivery-buffer"
+              ],
+              "query": [
+                {
+                  "key": "run_id",
+                  "value": "2147483647"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 404', function () { pm.response.to.have.status(404); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Margin tradeoff",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/dss/delivery-buffer/tradeoff",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "dss",
+                "delivery-buffer",
+                "tradeoff"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Tradeoff rows are ordered by safety margin', function () { const rows = pm.response.json().data; pm.expect(rows).to.be.an('array').that.is.not.empty; for (let i = 1; i < rows.length; i += 1) pm.expect(rows[i].safety_margin).to.be.at.least(rows[i - 1].safety_margin); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Tradeoff - no matching split",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/dss/delivery-buffer/tradeoff",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "dss",
+                "delivery-buffer",
+                "tradeoff"
+              ],
+              "query": [
+                {
+                  "key": "split_date",
+                  "value": "1900-01-01"
+                },
+                {
+                  "key": "test_end",
+                  "value": "1900-01-31"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 404', function () { pm.response.to.have.status(404); });"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pivot",
+      "item": [
+        {
+          "name": "Sales pivot - month by category",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/sale/pivot?rows=year_month&cols=category"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Pivot response has headers, matrix, and total', function () {",
+                  "  const json = pm.response.json();",
+                  "  pm.expect(json).to.have.property('matrix');",
+                  "  pm.expect(json).to.have.property('row_headers');",
+                  "  pm.expect(json).to.have.property('grand_total');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Sales pivot - seller state by quarter",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/sale/pivot?rows=seller_state&cols=year_quarter&measure=n_orders"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Measure is n_orders', function () { pm.expect(pm.response.json().measure).to.eql('n_orders'); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Sales pivot - all order statuses",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/sale/pivot?rows=order_status&cols=year"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Status axis includes multiple rows without default status filter', function () {",
+                  "  const json = pm.response.json();",
+                  "  pm.expect(json.row_headers.length).to.be.greaterThan(1);",
+                  "  pm.expect(json.meta.filters).to.not.have.property('status');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delivery pivot - month by customer state",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/delivery/pivot?rows=year_month&cols=customer_state&measure=late_rate"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Late rate is a ratio', function () {",
+                  "  const json = pm.response.json();",
+                  "  pm.expect(json.measure).to.eql('late_rate');",
+                  "  pm.expect(json.meta.unit).to.eql('ratio');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delivery pivot - delay buckets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/delivery/pivot?rows=delay_bucket&cols=customer_state&measure=eligible_orders"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('All six delay buckets are present', function () {",
+                  "  const json = pm.response.json();",
+                  "  pm.expect(json.row_headers).to.have.length(6);",
+                  "  pm.expect(json.measure).to.eql('eligible_orders');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Pivot metadata",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/meta/pivot"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', function () { pm.response.to.have.status(200); });",
+                  "pm.test('Metadata contains sales and delivery definitions', function () {",
+                  "  const json = pm.response.json();",
+                  "  pm.expect(json.data).to.have.property('sales');",
+                  "  pm.expect(json.data).to.have.property('delivery');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Validation - rows equal cols",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/sale/pivot?rows=year&cols=year"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Validation returns 400', function () { pm.response.to.have.status(400); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Validation - unsupported axis",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/sale/pivot?rows=not_an_axis&cols=year"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Validation returns 400', function () { pm.response.to.have.status(400); });"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Validation - invalid delay bucket measure",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/delivery/pivot?rows=delay_bucket&cols=customer_state&measure=late_rate"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Validation returns 400', function () { pm.response.to.have.status(400); });"
+                ],
+                "type": "text/javascript"
+              }
             }
           ]
         }

@@ -47,3 +47,7 @@ npx newman run .\postman\Data-Warehouse-API.postman_collection.json `
   -e .\postman\Data-Warehouse-API.postman_environment.json `
   --env-var "baseUrl=http://localhost:4000"
 ```
+
+## Pivot requests
+
+The `Pivot` folder covers sales and delivery cross-tabs, pivot metadata, and invalid parameter responses.

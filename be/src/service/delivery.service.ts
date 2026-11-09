@@ -6,6 +6,7 @@ import type {
   DistributionBucket,
   DistributionServiceResult,
 } from '../types/delivery.js';
+import { DELIVERY_DELAY_BUCKETS } from '../model/pivot.model.js';
 
 export const deliveryAnalysisService = async (
   filter: AnalysisParams,
@@ -44,14 +45,7 @@ export const deliveryDistributionService = async (
   filter: AnalysisParams,
 ): Promise<DistributionServiceResult> => {
   const { rows } = await deliveryDistribution(filter);
-  const buckets: DistributionBucket[] = [
-    { key: 'early_8plus', label: 'Sớm từ 8 ngày', side: 'early' },
-    { key: 'early_1_7', label: 'Sớm 1-7 ngày', side: 'early' },
-    { key: 'on_time', label: 'Đúng ngày dự kiến', side: 'on_time' },
-    { key: 'late_1_3', label: 'Trễ 1-3 ngày', side: 'late' },
-    { key: 'late_4_7', label: 'Trễ 4-7 ngày', side: 'late' },
-    { key: 'late_8plus', label: 'Trễ từ 8 ngày', side: 'late' },
-  ];
+  const buckets: DistributionBucket[] = DELIVERY_DELAY_BUCKETS.map((bucket) => ({ ...bucket }));
   const bucketIndex = 1;
   const counts = new Map(
     rows.flatMap((row) => {

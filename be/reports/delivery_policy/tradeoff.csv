@@ -1,0 +1,2 @@
+"run_id","safety_margin","late_rate","promised_days_avg","n_segments_scored","n_segments_met","pct_orders_in_met","worst_segment","worst_late_rate"
+"4","0","0.052614103644676016","27.883442454521756","14","6","0.7120973972347284","PA","0.14984709480122324"

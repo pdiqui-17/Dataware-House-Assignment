@@ -8,7 +8,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER:-dw_user}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
     ports:
-      - "${POSTGRES_PORT:-5432}:5432"
+      - "${POSTGRES_PORT:-5433}:5432"
     volumes:
       - olist_dw_data:/var/lib/postgresql/data
       - ./sql/001_create_dw.sql:/docker-entrypoint-initdb.d/001_create_dw.sql:ro

@@ -1,0 +1,1531 @@
+{
+  "run_id": 4,
+  "split_date": "2018-03-01",
+  "test_end_date": "2018-08-31",
+  "safety_margin": 0,
+  "n_train": 57050,
+  "n_test": 39153,
+  "review_buckets": [
+    {
+      "bucket_label": "le_-15",
+      "delay_min": null,
+      "delay_max": -15,
+      "n_reviewed": 21183,
+      "mean_score": 4.318156068545532
+    },
+    {
+      "bucket_label": "-14_-8",
+      "delay_min": -15,
+      "delay_max": -8,
+      "n_reviewed": 22915,
+      "mean_score": 4.29865415666594
+    },
+    {
+      "bucket_label": "-7_-1",
+      "delay_min": -8,
+      "delay_max": -1,
+      "n_reviewed": 8226,
+      "mean_score": 4.084488208120593
+    },
+    {
+      "bucket_label": "0_0",
+      "delay_min": -1,
+      "delay_max": 0,
+      "n_reviewed": 602,
+      "mean_score": 3.872093023255814
+    },
+    {
+      "bucket_label": "1_3",
+      "delay_min": 0,
+      "delay_max": 3,
+      "n_reviewed": 1006,
+      "mean_score": 3.168986083499006
+    },
+    {
+      "bucket_label": "4_7",
+      "delay_min": 3,
+      "delay_max": 7,
+      "n_reviewed": 971,
+      "mean_score": 2.076725025746653
+    },
+    {
+      "bucket_label": "gt_7",
+      "delay_min": 7,
+      "delay_max": null,
+      "n_reviewed": 1715,
+      "mean_score": 1.6720116618075802
+    }
+  ],
+  "review_monotone": true,
+  "evaluation_rows": [
+    {
+      "policy": "current_k0",
+      "segment": "AC",
+      "k": 0,
+      "n_test": 18,
+      "late_rate_test": 0.05555555555555555,
+      "ci_low": 0.009875190978303097,
+      "ci_high": 0.25757300781872594,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "current_k0",
+      "segment": "AL",
+      "k": 0,
+      "n_test": 135,
+      "late_rate_test": 0.16296296296296298,
+      "ci_low": 0.11015087164704164,
+      "ci_high": 0.23442530341662338,
+      "status": "low_power",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "current_k0",
+      "segment": "AM",
+      "k": 0,
+      "n_test": 52,
+      "late_rate_test": 0.038461538461538464,
+      "ci_low": 0.010611711001315298,
+      "ci_high": 0.12981189157455764,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "current_k0",
+      "segment": "AP",
+      "k": 0,
+      "n_test": 26,
+      "late_rate_test": 0,
+      "ci_low": 0,
+      "ci_high": 0.1287289218592153,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "current_k0",
+      "segment": "BA",
+      "k": 0,
+      "n_test": 1290,
+      "late_rate_test": 0.14573643410852713,
+      "ci_low": 0.12753356485732212,
+      "ci_high": 0.1660429442513832,
+      "status": "missed",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "current_k0",
+      "segment": "CE",
+      "k": 0,
+      "n_test": 472,
+      "late_rate_test": 0.1673728813559322,
+      "ci_low": 0.13640917809055914,
+      "ci_high": 0.20370716911003012,
+      "status": "missed",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "current_k0",
+      "segment": "DF",
+      "k": 0,
+      "n_test": 888,
+      "late_rate_test": 0.06306306306306306,
+      "ci_low": 0.048881296646874545,
+      "ci_high": 0.08100889591478813,
+      "status": "missed",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "current_k0",
+      "segment": "ES",
+      "k": 0,
+      "n_test": 753,
+      "late_rate_test": 0.14873837981407703,
+      "ci_low": 0.12510801690506937,
+      "ci_high": 0.17593450153163911,
+      "status": "missed",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "current_k0",
+      "segment": "GO",
+      "k": 0,
+      "n_test": 743,
+      "late_rate_test": 0.06729475100942127,
+      "ci_low": 0.0514152219868277,
+      "ci_high": 0.08762561137111928,
+      "status": "missed",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "current_k0",
+      "segment": "MA",
+      "k": 0,
+      "n_test": 236,
+      "late_rate_test": 0.19915254237288135,
+      "ci_low": 0.15319977829870352,
+      "ci_high": 0.25474244862812884,
+      "status": "low_power",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "current_k0",
+      "segment": "MG",
+      "k": 0,
+      "n_test": 4443,
+      "late_rate_test": 0.06392077425163178,
+      "ci_low": 0.05709810919458834,
+      "ci_high": 0.0714968641401136,
+      "status": "missed",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "current_k0",
+      "segment": "MS",
+      "k": 0,
+      "n_test": 277,
+      "late_rate_test": 0.1552346570397112,
+      "ci_low": 0.11733617359176043,
+      "ci_high": 0.20256480968170368,
+      "status": "low_power",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "current_k0",
+      "segment": "MT",
+      "k": 0,
+      "n_test": 326,
+      "late_rate_test": 0.05214723926380368,
+      "ci_low": 0.032809867114722197,
+      "ci_high": 0.08191633788082751,
+      "status": "missed",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "current_k0",
+      "segment": "PA",
+      "k": 0,
+      "n_test": 327,
+      "late_rate_test": 0.18960244648318042,
+      "ci_low": 0.15081447890156213,
+      "ci_high": 0.23559857608977208,
+      "status": "missed",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "current_k0",
+      "segment": "PB",
+      "k": 0,
+      "n_test": 203,
+      "late_rate_test": 0.08374384236453201,
+      "ci_low": 0.05294134127506849,
+      "ci_high": 0.13000775914438836,
+      "status": "low_power",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "current_k0",
+      "segment": "PE",
+      "k": 0,
+      "n_test": 629,
+      "late_rate_test": 0.10015898251192369,
+      "ci_low": 0.07907059204177391,
+      "ci_high": 0.12610158340743716,
+      "status": "missed",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "current_k0",
+      "segment": "PI",
+      "k": 0,
+      "n_test": 179,
+      "late_rate_test": 0.17318435754189945,
+      "ci_low": 0.12477348012661359,
+      "ci_high": 0.23532788444006497,
+      "status": "low_power",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "current_k0",
+      "segment": "PR",
+      "k": 0,
+      "n_test": 2005,
+      "late_rate_test": 0.04638403990024938,
+      "ci_low": 0.03801365949982722,
+      "ci_high": 0.056489297907345186,
+      "status": "met",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "current_k0",
+      "segment": "RJ",
+      "k": 0,
+      "n_test": 4613,
+      "late_rate_test": 0.09993496639930631,
+      "ci_low": 0.09161034091478779,
+      "ci_high": 0.10892534285919805,
+      "status": "missed",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "current_k0",
+      "segment": "RN",
+      "k": 0,
+      "n_test": 176,
+      "late_rate_test": 0.10227272727272728,
+      "ci_low": 0.06567589244368457,
+      "ci_high": 0.15586067138288526,
+      "status": "low_power",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "current_k0",
+      "segment": "RO",
+      "k": 0,
+      "n_test": 76,
+      "late_rate_test": 0.039473684210526314,
+      "ci_low": 0.013514635094539595,
+      "ci_high": 0.10974787746545532,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "current_k0",
+      "segment": "RR",
+      "k": 0,
+      "n_test": 18,
+      "late_rate_test": 0.05555555555555555,
+      "ci_low": 0.009875190978303097,
+      "ci_high": 0.25757300781872594,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "current_k0",
+      "segment": "RS",
+      "k": 0,
+      "n_test": 2007,
+      "late_rate_test": 0.05879422022919781,
+      "ci_low": 0.04932080690769783,
+      "ci_high": 0.06995336946688062,
+      "status": "missed",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "current_k0",
+      "segment": "SC",
+      "k": 0,
+      "n_test": 1319,
+      "late_rate_test": 0.05686125852918878,
+      "ci_low": 0.045602635448802234,
+      "ci_high": 0.07069358266175119,
+      "status": "missed",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "current_k0",
+      "segment": "SE",
+      "k": 0,
+      "n_test": 112,
+      "late_rate_test": 0.1875,
+      "ci_low": 0.1260345554053866,
+      "ci_high": 0.26969128651145335,
+      "status": "low_power",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "current_k0",
+      "segment": "SP",
+      "k": 0,
+      "n_test": 17722,
+      "late_rate_test": 0.049204378738291386,
+      "ci_low": 0.04611644952183422,
+      "ci_high": 0.05248769645798537,
+      "status": "met",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "current_k0",
+      "segment": "TO",
+      "k": 0,
+      "n_test": 108,
+      "late_rate_test": 0.12037037037037036,
+      "ci_low": 0.07171063993921549,
+      "ci_high": 0.19510865172020736,
+      "status": "low_power",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "global_k",
+      "segment": "AC",
+      "k": 3,
+      "n_test": 18,
+      "late_rate_test": 0.05555555555555555,
+      "ci_low": 0.009875190978303097,
+      "ci_high": 0.25757300781872594,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "global_k",
+      "segment": "AL",
+      "k": 3,
+      "n_test": 135,
+      "late_rate_test": 0.1259259259259259,
+      "ci_low": 0.08012873199484877,
+      "ci_high": 0.19242284692196615,
+      "status": "low_power",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "global_k",
+      "segment": "AM",
+      "k": 3,
+      "n_test": 52,
+      "late_rate_test": 0.019230769230769232,
+      "ci_low": 0.0034028080709451597,
+      "ci_high": 0.10120511127892247,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "global_k",
+      "segment": "AP",
+      "k": 3,
+      "n_test": 26,
+      "late_rate_test": 0,
+      "ci_low": 0,
+      "ci_high": 0.1287289218592153,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "global_k",
+      "segment": "BA",
+      "k": 3,
+      "n_test": 1290,
+      "late_rate_test": 0.11705426356589148,
+      "ci_low": 0.10063704178177413,
+      "ci_high": 0.13574544290028373,
+      "status": "missed",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "global_k",
+      "segment": "CE",
+      "k": 3,
+      "n_test": 472,
+      "late_rate_test": 0.13135593220338984,
+      "ci_low": 0.10383614442263994,
+      "ci_high": 0.16482783272960555,
+      "status": "missed",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "global_k",
+      "segment": "DF",
+      "k": 3,
+      "n_test": 888,
+      "late_rate_test": 0.04054054054054054,
+      "ci_low": 0.0294253502849499,
+      "ci_high": 0.05561382127473666,
+      "status": "met",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "global_k",
+      "segment": "ES",
+      "k": 3,
+      "n_test": 753,
+      "late_rate_test": 0.11155378486055777,
+      "ci_low": 0.09101024672548857,
+      "ci_high": 0.13604055343608884,
+      "status": "missed",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "global_k",
+      "segment": "GO",
+      "k": 3,
+      "n_test": 743,
+      "late_rate_test": 0.04172274562584118,
+      "ci_low": 0.029546951689962873,
+      "ci_high": 0.05861293558338373,
+      "status": "met",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "global_k",
+      "segment": "MA",
+      "k": 3,
+      "n_test": 236,
+      "late_rate_test": 0.13559322033898305,
+      "ci_low": 0.09771090895781184,
+      "ci_high": 0.18514868985497104,
+      "status": "low_power",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "global_k",
+      "segment": "MG",
+      "k": 3,
+      "n_test": 4443,
+      "late_rate_test": 0.04343911771325681,
+      "ci_low": 0.03782928310219638,
+      "ci_high": 0.04983776381880636,
+      "status": "met",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "global_k",
+      "segment": "MS",
+      "k": 3,
+      "n_test": 277,
+      "late_rate_test": 0.09747292418772563,
+      "ci_low": 0.0678557796689789,
+      "ci_high": 0.13810191284401843,
+      "status": "low_power",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "global_k",
+      "segment": "MT",
+      "k": 3,
+      "n_test": 326,
+      "late_rate_test": 0.03680981595092025,
+      "ci_low": 0.021180004702492133,
+      "ci_high": 0.0632286045737271,
+      "status": "met",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "global_k",
+      "segment": "PA",
+      "k": 3,
+      "n_test": 327,
+      "late_rate_test": 0.1712538226299694,
+      "ci_low": 0.13429721299878736,
+      "ci_high": 0.2158446925339065,
+      "status": "missed",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "global_k",
+      "segment": "PB",
+      "k": 3,
+      "n_test": 203,
+      "late_rate_test": 0.06403940886699508,
+      "ci_low": 0.03780341618196201,
+      "ci_high": 0.10646871857687748,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "global_k",
+      "segment": "PE",
+      "k": 3,
+      "n_test": 629,
+      "late_rate_test": 0.0794912559618442,
+      "ci_low": 0.060814478045490936,
+      "ci_high": 0.10327315776491193,
+      "status": "missed",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "global_k",
+      "segment": "PI",
+      "k": 3,
+      "n_test": 179,
+      "late_rate_test": 0.10614525139664804,
+      "ci_low": 0.06901248284853817,
+      "ci_high": 0.1598276231677155,
+      "status": "low_power",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "global_k",
+      "segment": "PR",
+      "k": 3,
+      "n_test": 2005,
+      "late_rate_test": 0.02743142144638404,
+      "ci_low": 0.02113551070189521,
+      "ci_high": 0.03553469506313595,
+      "status": "met",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "global_k",
+      "segment": "RJ",
+      "k": 3,
+      "n_test": 4613,
+      "late_rate_test": 0.08085844352915673,
+      "ci_low": 0.07333571579928146,
+      "ci_high": 0.08907866760738427,
+      "status": "missed",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "global_k",
+      "segment": "RN",
+      "k": 3,
+      "n_test": 176,
+      "late_rate_test": 0.07954545454545454,
+      "ci_low": 0.04797264095437627,
+      "ci_high": 0.12908029794799752,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "global_k",
+      "segment": "RO",
+      "k": 3,
+      "n_test": 76,
+      "late_rate_test": 0.02631578947368421,
+      "ci_low": 0.00724665907512833,
+      "ci_high": 0.09096621098658073,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "global_k",
+      "segment": "RR",
+      "k": 3,
+      "n_test": 18,
+      "late_rate_test": 0.05555555555555555,
+      "ci_low": 0.009875190978303097,
+      "ci_high": 0.25757300781872594,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "global_k",
+      "segment": "RS",
+      "k": 3,
+      "n_test": 2007,
+      "late_rate_test": 0.04434479322371699,
+      "ci_low": 0.0361755649448975,
+      "ci_high": 0.05425496503201045,
+      "status": "met",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "global_k",
+      "segment": "SC",
+      "k": 3,
+      "n_test": 1319,
+      "late_rate_test": 0.0356330553449583,
+      "ci_low": 0.026901487290220155,
+      "ci_high": 0.04706161552024002,
+      "status": "met",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "global_k",
+      "segment": "SE",
+      "k": 3,
+      "n_test": 112,
+      "late_rate_test": 0.16071428571428573,
+      "ci_low": 0.10414537208810225,
+      "ci_high": 0.2397855419930383,
+      "status": "low_power",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "global_k",
+      "segment": "SP",
+      "k": 3,
+      "n_test": 17722,
+      "late_rate_test": 0.028269946958582554,
+      "ci_low": 0.025930092620929376,
+      "ci_high": 0.030814263417534998,
+      "status": "met",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "global_k",
+      "segment": "TO",
+      "k": 3,
+      "n_test": 108,
+      "late_rate_test": 0.08333333333333333,
+      "ci_low": 0.04446040457498103,
+      "ci_high": 0.15082906188048312,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "state_k",
+      "segment": "AC",
+      "k": 3,
+      "n_test": 18,
+      "late_rate_test": 0.05555555555555555,
+      "ci_low": 0.009875190978303097,
+      "ci_high": 0.25757300781872594,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "state_k",
+      "segment": "AL",
+      "k": 3,
+      "n_test": 135,
+      "late_rate_test": 0.1259259259259259,
+      "ci_low": 0.08012873199484877,
+      "ci_high": 0.19242284692196615,
+      "status": "low_power",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "state_k",
+      "segment": "AM",
+      "k": 3,
+      "n_test": 52,
+      "late_rate_test": 0.019230769230769232,
+      "ci_low": 0.0034028080709451597,
+      "ci_high": 0.10120511127892247,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "state_k",
+      "segment": "AP",
+      "k": 3,
+      "n_test": 26,
+      "late_rate_test": 0,
+      "ci_low": 0,
+      "ci_high": 0.1287289218592153,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "state_k",
+      "segment": "BA",
+      "k": 8,
+      "n_test": 1290,
+      "late_rate_test": 0.05813953488372093,
+      "ci_low": 0.046633345894932496,
+      "ci_high": 0.07226952104590349,
+      "status": "missed",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "state_k",
+      "segment": "CE",
+      "k": 13,
+      "n_test": 472,
+      "late_rate_test": 0.05508474576271186,
+      "ci_low": 0.03786541184751713,
+      "ci_high": 0.07948766402588259,
+      "status": "missed",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "state_k",
+      "segment": "DF",
+      "k": 1,
+      "n_test": 888,
+      "late_rate_test": 0.05405405405405406,
+      "ci_low": 0.0410104967678259,
+      "ci_high": 0.07093928739304635,
+      "status": "missed",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "state_k",
+      "segment": "ES",
+      "k": 5,
+      "n_test": 753,
+      "late_rate_test": 0.08366533864541832,
+      "ci_low": 0.06593934980777963,
+      "ci_high": 0.10561766164744948,
+      "status": "missed",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "state_k",
+      "segment": "GO",
+      "k": 3,
+      "n_test": 743,
+      "late_rate_test": 0.04172274562584118,
+      "ci_low": 0.029546951689962873,
+      "ci_high": 0.05861293558338373,
+      "status": "met",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "state_k",
+      "segment": "MA",
+      "k": 15,
+      "n_test": 236,
+      "late_rate_test": 0.012711864406779662,
+      "ci_low": 0.004332426638143875,
+      "ci_high": 0.036700757820809976,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "state_k",
+      "segment": "MG",
+      "k": -1,
+      "n_test": 4443,
+      "late_rate_test": 0.07720009002925951,
+      "ci_low": 0.06971197769561878,
+      "ci_high": 0.08541868419301997,
+      "status": "missed",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "state_k",
+      "segment": "MS",
+      "k": 2,
+      "n_test": 277,
+      "late_rate_test": 0.10469314079422383,
+      "ci_low": 0.07388777861462396,
+      "ci_high": 0.1463128252434317,
+      "status": "low_power",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "state_k",
+      "segment": "MT",
+      "k": 2,
+      "n_test": 326,
+      "late_rate_test": 0.04294478527607362,
+      "ci_low": 0.025751005199124783,
+      "ci_high": 0.07078464236482665,
+      "status": "met",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "state_k",
+      "segment": "PA",
+      "k": 5,
+      "n_test": 327,
+      "late_rate_test": 0.14984709480122324,
+      "ci_low": 0.1152383481090219,
+      "ci_high": 0.1925872163885916,
+      "status": "missed",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "state_k",
+      "segment": "PB",
+      "k": 7,
+      "n_test": 203,
+      "late_rate_test": 0.04433497536945813,
+      "ci_low": 0.023497416899410303,
+      "ci_high": 0.08209775219881174,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "state_k",
+      "segment": "PE",
+      "k": 7,
+      "n_test": 629,
+      "late_rate_test": 0.06200317965023847,
+      "ci_low": 0.04568552190051314,
+      "ci_high": 0.08363827267705207,
+      "status": "missed",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "state_k",
+      "segment": "PI",
+      "k": 3,
+      "n_test": 179,
+      "late_rate_test": 0.10614525139664804,
+      "ci_low": 0.06901248284853817,
+      "ci_high": 0.1598276231677155,
+      "status": "low_power",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "state_k",
+      "segment": "PR",
+      "k": -1,
+      "n_test": 2005,
+      "late_rate_test": 0.059351620947630926,
+      "ci_low": 0.049827464246608305,
+      "ci_high": 0.0705610600736081,
+      "status": "missed",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "state_k",
+      "segment": "RJ",
+      "k": 14,
+      "n_test": 4613,
+      "late_rate_test": 0.030565792326035117,
+      "ci_low": 0.025975666244496494,
+      "ci_high": 0.03593710710287078,
+      "status": "met",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "state_k",
+      "segment": "RN",
+      "k": 3,
+      "n_test": 176,
+      "late_rate_test": 0.07954545454545454,
+      "ci_low": 0.04797264095437627,
+      "ci_high": 0.12908029794799752,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "state_k",
+      "segment": "RO",
+      "k": 3,
+      "n_test": 76,
+      "late_rate_test": 0.02631578947368421,
+      "ci_low": 0.00724665907512833,
+      "ci_high": 0.09096621098658073,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "state_k",
+      "segment": "RR",
+      "k": 3,
+      "n_test": 18,
+      "late_rate_test": 0.05555555555555555,
+      "ci_low": 0.009875190978303097,
+      "ci_high": 0.25757300781872594,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "state_k",
+      "segment": "RS",
+      "k": 3,
+      "n_test": 2007,
+      "late_rate_test": 0.04434479322371699,
+      "ci_low": 0.0361755649448975,
+      "ci_high": 0.05425496503201045,
+      "status": "met",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "state_k",
+      "segment": "SC",
+      "k": 6,
+      "n_test": 1319,
+      "late_rate_test": 0.02122820318423048,
+      "ci_low": 0.014727400989640526,
+      "ci_high": 0.03050965929575638,
+      "status": "met",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "state_k",
+      "segment": "SE",
+      "k": 3,
+      "n_test": 112,
+      "late_rate_test": 0.16071428571428573,
+      "ci_low": 0.10414537208810225,
+      "ci_high": 0.2397855419930383,
+      "status": "low_power",
+      "significantly_above_target": true
+    },
+    {
+      "policy": "state_k",
+      "segment": "SP",
+      "k": 0,
+      "n_test": 17722,
+      "late_rate_test": 0.049204378738291386,
+      "ci_low": 0.04611644952183422,
+      "ci_high": 0.05248769645798537,
+      "status": "met",
+      "significantly_above_target": false
+    },
+    {
+      "policy": "state_k",
+      "segment": "TO",
+      "k": 3,
+      "n_test": 108,
+      "late_rate_test": 0.08333333333333333,
+      "ci_low": 0.04446040457498103,
+      "ci_high": 0.15082906188048312,
+      "status": "low_power",
+      "significantly_above_target": false
+    }
+  ],
+  "evaluation_summaries": [
+    {
+      "policy": "current_k0",
+      "late_rate": 0.0702117334559293,
+      "promised_days_avg": 25.065982745176363,
+      "n_segments_scored": 14,
+      "n_segments_met": 2,
+      "pct_orders_in_met": 0.525534805658417,
+      "worst_segment": "PA",
+      "worst_late_rate": 0.18960244648318042
+    },
+    {
+      "policy": "global_k",
+      "late_rate": 0.04837432636068756,
+      "promised_days_avg": 28.065982745176367,
+      "n_segments_scored": 14,
+      "n_segments_met": 8,
+      "pct_orders_in_met": 0.7846391560327144,
+      "worst_segment": "PA",
+      "worst_late_rate": 0.1712538226299694
+    },
+    {
+      "policy": "state_k",
+      "late_rate": 0.052614103644676016,
+      "promised_days_avg": 27.883442454521756,
+      "n_segments_scored": 14,
+      "n_segments_met": 6,
+      "pct_orders_in_met": 0.7120973972347284,
+      "worst_segment": "PA",
+      "worst_late_rate": 0.14984709480122324
+    }
+  ],
+  "state_policies": [
+    {
+      "segment": "ALL",
+      "k_recommended": 3,
+      "fallback": false,
+      "attainable": true
+    },
+    {
+      "segment": "AC",
+      "k_recommended": 3,
+      "fallback": true,
+      "attainable": true
+    },
+    {
+      "segment": "AL",
+      "k_recommended": 3,
+      "fallback": true,
+      "attainable": true
+    },
+    {
+      "segment": "AM",
+      "k_recommended": 3,
+      "fallback": true,
+      "attainable": true
+    },
+    {
+      "segment": "AP",
+      "k_recommended": 3,
+      "fallback": true,
+      "attainable": true
+    },
+    {
+      "segment": "BA",
+      "k_recommended": 8,
+      "fallback": false,
+      "attainable": true
+    },
+    {
+      "segment": "CE",
+      "k_recommended": 13,
+      "fallback": false,
+      "attainable": true
+    },
+    {
+      "segment": "DF",
+      "k_recommended": 1,
+      "fallback": false,
+      "attainable": true
+    },
+    {
+      "segment": "ES",
+      "k_recommended": 5,
+      "fallback": false,
+      "attainable": true
+    },
+    {
+      "segment": "GO",
+      "k_recommended": 3,
+      "fallback": false,
+      "attainable": true
+    },
+    {
+      "segment": "MA",
+      "k_recommended": 15,
+      "fallback": false,
+      "attainable": true
+    },
+    {
+      "segment": "MG",
+      "k_recommended": -1,
+      "fallback": false,
+      "attainable": true
+    },
+    {
+      "segment": "MS",
+      "k_recommended": 2,
+      "fallback": false,
+      "attainable": true
+    },
+    {
+      "segment": "MT",
+      "k_recommended": 2,
+      "fallback": false,
+      "attainable": true
+    },
+    {
+      "segment": "PA",
+      "k_recommended": 5,
+      "fallback": false,
+      "attainable": true
+    },
+    {
+      "segment": "PB",
+      "k_recommended": 7,
+      "fallback": false,
+      "attainable": true
+    },
+    {
+      "segment": "PE",
+      "k_recommended": 7,
+      "fallback": false,
+      "attainable": true
+    },
+    {
+      "segment": "PI",
+      "k_recommended": 3,
+      "fallback": true,
+      "attainable": true
+    },
+    {
+      "segment": "PR",
+      "k_recommended": -1,
+      "fallback": false,
+      "attainable": true
+    },
+    {
+      "segment": "RJ",
+      "k_recommended": 14,
+      "fallback": false,
+      "attainable": true
+    },
+    {
+      "segment": "RN",
+      "k_recommended": 3,
+      "fallback": true,
+      "attainable": true
+    },
+    {
+      "segment": "RO",
+      "k_recommended": 3,
+      "fallback": true,
+      "attainable": true
+    },
+    {
+      "segment": "RR",
+      "k_recommended": 3,
+      "fallback": true,
+      "attainable": true
+    },
+    {
+      "segment": "RS",
+      "k_recommended": 3,
+      "fallback": false,
+      "attainable": true
+    },
+    {
+      "segment": "SC",
+      "k_recommended": 6,
+      "fallback": false,
+      "attainable": true
+    },
+    {
+      "segment": "SE",
+      "k_recommended": 3,
+      "fallback": true,
+      "attainable": true
+    },
+    {
+      "segment": "SP",
+      "k_recommended": 0,
+      "fallback": false,
+      "attainable": true
+    },
+    {
+      "segment": "TO",
+      "k_recommended": 3,
+      "fallback": true,
+      "attainable": true
+    }
+  ],
+  "backtests": [
+    {
+      "segment": "ALL",
+      "k": 3,
+      "n_test": 39153,
+      "predicted_late": 0.04851884312007011,
+      "actual_late": 0.04837432636068756,
+      "deviation": -0.00014451675938255415,
+      "ci_low": 0.04629304442311375,
+      "ci_high": 0.05054422123858129,
+      "status": "met",
+      "significantly_above_target": false
+    },
+    {
+      "segment": "AC",
+      "k": 3,
+      "n_test": 18,
+      "predicted_late": 0.016129032258064516,
+      "actual_late": 0.05555555555555555,
+      "deviation": 0.03942652329749104,
+      "ci_low": 0.009875190978303097,
+      "ci_high": 0.25757300781872594,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "segment": "AL",
+      "k": 3,
+      "n_test": 135,
+      "predicted_late": 0.19923371647509577,
+      "actual_late": 0.1259259259259259,
+      "deviation": -0.07330779054916986,
+      "ci_low": 0.08012873199484877,
+      "ci_high": 0.19242284692196615,
+      "status": "low_power",
+      "significantly_above_target": true
+    },
+    {
+      "segment": "AM",
+      "k": 3,
+      "n_test": 52,
+      "predicted_late": 0.010752688172043012,
+      "actual_late": 0.019230769230769232,
+      "deviation": 0.00847808105872622,
+      "ci_low": 0.0034028080709451597,
+      "ci_high": 0.10120511127892247,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "segment": "AP",
+      "k": 3,
+      "n_test": 26,
+      "predicted_late": 0.024390243902439025,
+      "actual_late": 0,
+      "deviation": -0.024390243902439025,
+      "ci_low": 0,
+      "ci_high": 0.1287289218592153,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "segment": "BA",
+      "k": 8,
+      "n_test": 1290,
+      "predicted_late": 0.04686704024452369,
+      "actual_late": 0.05813953488372093,
+      "deviation": 0.011272494639197238,
+      "ci_low": 0.046633345894932496,
+      "ci_high": 0.07226952104590349,
+      "status": "missed",
+      "significantly_above_target": false
+    },
+    {
+      "segment": "CE",
+      "k": 13,
+      "n_test": 472,
+      "predicted_late": 0.046192259675405745,
+      "actual_late": 0.05508474576271186,
+      "deviation": 0.008892486087306119,
+      "ci_low": 0.03786541184751713,
+      "ci_high": 0.07948766402588259,
+      "status": "missed",
+      "significantly_above_target": false
+    },
+    {
+      "segment": "DF",
+      "k": 1,
+      "n_test": 888,
+      "predicted_late": 0.047217537942664416,
+      "actual_late": 0.05405405405405406,
+      "deviation": 0.006836516111389641,
+      "ci_low": 0.0410104967678259,
+      "ci_high": 0.07093928739304635,
+      "status": "missed",
+      "significantly_above_target": false
+    },
+    {
+      "segment": "ES",
+      "k": 5,
+      "n_test": 753,
+      "predicted_late": 0.048426150121065374,
+      "actual_late": 0.08366533864541832,
+      "deviation": 0.03523918852435295,
+      "ci_low": 0.06593934980777963,
+      "ci_high": 0.10561766164744948,
+      "status": "missed",
+      "significantly_above_target": true
+    },
+    {
+      "segment": "GO",
+      "k": 3,
+      "n_test": 743,
+      "predicted_late": 0.04971002485501243,
+      "actual_late": 0.04172274562584118,
+      "deviation": -0.007987279229171244,
+      "ci_low": 0.029546951689962873,
+      "ci_high": 0.05861293558338373,
+      "status": "met",
+      "significantly_above_target": false
+    },
+    {
+      "segment": "MA",
+      "k": 15,
+      "n_test": 236,
+      "predicted_late": 0.04821802935010482,
+      "actual_late": 0.012711864406779662,
+      "deviation": -0.03550616494332516,
+      "ci_low": 0.004332426638143875,
+      "ci_high": 0.036700757820809976,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "segment": "MG",
+      "k": -1,
+      "n_test": 4443,
+      "predicted_late": 0.04275741710296684,
+      "actual_late": 0.07720009002925951,
+      "deviation": 0.03444267292629267,
+      "ci_low": 0.06971197769561878,
+      "ci_high": 0.08541868419301997,
+      "status": "missed",
+      "significantly_above_target": true
+    },
+    {
+      "segment": "MS",
+      "k": 2,
+      "n_test": 277,
+      "predicted_late": 0.04716981132075472,
+      "actual_late": 0.10469314079422383,
+      "deviation": 0.05752332947346911,
+      "ci_low": 0.07388777861462396,
+      "ci_high": 0.1463128252434317,
+      "status": "low_power",
+      "significantly_above_target": true
+    },
+    {
+      "segment": "MT",
+      "k": 2,
+      "n_test": 326,
+      "predicted_late": 0.04830053667262969,
+      "actual_late": 0.04294478527607362,
+      "deviation": -0.005355751396556072,
+      "ci_low": 0.025751005199124783,
+      "ci_high": 0.07078464236482665,
+      "status": "met",
+      "significantly_above_target": false
+    },
+    {
+      "segment": "PA",
+      "k": 5,
+      "n_test": 327,
+      "predicted_late": 0.04715447154471545,
+      "actual_late": 0.14984709480122324,
+      "deviation": 0.1026926232565078,
+      "ci_low": 0.1152383481090219,
+      "ci_high": 0.1925872163885916,
+      "status": "missed",
+      "significantly_above_target": true
+    },
+    {
+      "segment": "PB",
+      "k": 7,
+      "n_test": 203,
+      "predicted_late": 0.038338658146964855,
+      "actual_late": 0.04433497536945813,
+      "deviation": 0.005996317222493275,
+      "ci_low": 0.023497416899410303,
+      "ci_high": 0.08209775219881174,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "segment": "PE",
+      "k": 7,
+      "n_test": 629,
+      "predicted_late": 0.049060542797494784,
+      "actual_late": 0.06200317965023847,
+      "deviation": 0.012942636852743689,
+      "ci_low": 0.04568552190051314,
+      "ci_high": 0.08363827267705207,
+      "status": "missed",
+      "significantly_above_target": false
+    },
+    {
+      "segment": "PI",
+      "k": 3,
+      "n_test": 179,
+      "predicted_late": 0.0945945945945946,
+      "actual_late": 0.10614525139664804,
+      "deviation": 0.011550656802053444,
+      "ci_low": 0.06901248284853817,
+      "ci_high": 0.1598276231677155,
+      "status": "low_power",
+      "significantly_above_target": true
+    },
+    {
+      "segment": "PR",
+      "k": -1,
+      "n_test": 2005,
+      "predicted_late": 0.04382332643202209,
+      "actual_late": 0.059351620947630926,
+      "deviation": 0.015528294515608838,
+      "ci_low": 0.049827464246608305,
+      "ci_high": 0.0705610600736081,
+      "status": "missed",
+      "significantly_above_target": false
+    },
+    {
+      "segment": "RJ",
+      "k": 14,
+      "n_test": 4613,
+      "predicted_late": 0.0471612316486943,
+      "actual_late": 0.030565792326035117,
+      "deviation": -0.01659543932265918,
+      "ci_low": 0.025975666244496494,
+      "ci_high": 0.03593710710287078,
+      "status": "met",
+      "significantly_above_target": false
+    },
+    {
+      "segment": "RN",
+      "k": 3,
+      "n_test": 176,
+      "predicted_late": 0.07142857142857142,
+      "actual_late": 0.07954545454545454,
+      "deviation": 0.00811688311688312,
+      "ci_low": 0.04797264095437627,
+      "ci_high": 0.12908029794799752,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "segment": "RO",
+      "k": 3,
+      "n_test": 76,
+      "predicted_late": 0.011976047904191617,
+      "actual_late": 0.02631578947368421,
+      "deviation": 0.014339741569492592,
+      "ci_low": 0.00724665907512833,
+      "ci_high": 0.09096621098658073,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "segment": "RR",
+      "k": 3,
+      "n_test": 18,
+      "predicted_late": 0.18181818181818182,
+      "actual_late": 0.05555555555555555,
+      "deviation": -0.12626262626262627,
+      "ci_low": 0.009875190978303097,
+      "ci_high": 0.25757300781872594,
+      "status": "low_power",
+      "significantly_above_target": false
+    },
+    {
+      "segment": "RS",
+      "k": 3,
+      "n_test": 2007,
+      "predicted_late": 0.04608433734939759,
+      "actual_late": 0.04434479322371699,
+      "deviation": -0.0017395441256806005,
+      "ci_low": 0.0361755649448975,
+      "ci_high": 0.05425496503201045,
+      "status": "met",
+      "significantly_above_target": false
+    },
+    {
+      "segment": "SC",
+      "k": 6,
+      "n_test": 1319,
+      "predicted_late": 0.04824165915238954,
+      "actual_late": 0.02122820318423048,
+      "deviation": -0.02701345596815906,
+      "ci_low": 0.014727400989640526,
+      "ci_high": 0.03050965929575638,
+      "status": "met",
+      "significantly_above_target": false
+    },
+    {
+      "segment": "SE",
+      "k": 3,
+      "n_test": 112,
+      "predicted_late": 0.11363636363636363,
+      "actual_late": 0.16071428571428573,
+      "deviation": 0.047077922077922094,
+      "ci_low": 0.10414537208810225,
+      "ci_high": 0.2397855419930383,
+      "status": "low_power",
+      "significantly_above_target": true
+    },
+    {
+      "segment": "SP",
+      "k": 0,
+      "n_test": 17722,
+      "predicted_late": 0.04167217885963752,
+      "actual_late": 0.049204378738291386,
+      "deviation": 0.007532199878653868,
+      "ci_low": 0.04611644952183422,
+      "ci_high": 0.05248769645798537,
+      "status": "met",
+      "significantly_above_target": false
+    },
+    {
+      "segment": "TO",
+      "k": 3,
+      "n_test": 108,
+      "predicted_late": 0.06626506024096386,
+      "actual_late": 0.08333333333333333,
+      "deviation": 0.017068273092369468,
+      "ci_low": 0.04446040457498103,
+      "ci_high": 0.15082906188048312,
+      "status": "low_power",
+      "significantly_above_target": false
+    }
+  ],
+  "failed_segments": [
+    "BA",
+    "CE",
+    "DF",
+    "ES",
+    "MG",
+    "PA",
+    "PE",
+    "PR"
+  ],
+  "low_power_segments": [
+    "AC",
+    "AL",
+    "AM",
+    "AP",
+    "MA",
+    "MS",
+    "PB",
+    "PI",
+    "RN",
+    "RO",
+    "RR",
+    "SE",
+    "TO"
+  ],
+  "fallback_segments": [
+    "AC",
+    "AL",
+    "AM",
+    "AP",
+    "PI",
+    "RN",
+    "RO",
+    "RR",
+    "SE",
+    "TO"
+  ],
+  "unattainable_segments": []
+}
